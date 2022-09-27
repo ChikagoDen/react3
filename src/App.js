@@ -1,14 +1,14 @@
 import './App.css';
-import {useState} from "react";
+import {useState, useRef, useEffect} from "react";
 import {Box, Button, Input, List, ListItem, ListItemText, FormGroup, Grid} from "@mui/material";
 import  Message from "./Message";
 
 export function App() {
-    const chatList =[
+    const [chatList] = useState([
         { id:'1',chatName:"Чат1"},
         { id:'2',chatName:"Чат2"},
         { id:'3',chatName:"Чат3"},
-    ]
+    ]);
     const [messagesList, setMessagesList] = useState([]);
 
     let [form, setForm] = useState({
@@ -19,7 +19,7 @@ export function App() {
     const handleSubmit = e => {
         e.preventDefault();
         setMessagesList(prevState => [...prevState,{
-            id:messagesList.length,
+            id:messagesList.length<=0?0:messagesList[messagesList.length-1].id+1,
             text:form.text,
             author:form.author,
         }]);
@@ -32,12 +32,26 @@ export function App() {
         setForm({...form,[e.target.name]: e.target.value});
     };
 
+    const  inputRef=useRef(null);
+
+    useEffect(()=>{
+
+        focusTextField(inputRef.current);
+    },[form.text]
+        );
+    function focusTextField(input){
+    if(input) {
+        input.focus();
+    }
+    }
+
+
     return(
         <Box component="div" sx={{ border: '1px dashed grey' }}>
             <FormGroup>
                 <Box component="label" sx={{ padding: '15px' }}>
                     Текст:
-                    <Input sx={{ border: '1px solid green', margin: '15px'}} placeholder="Введите текст"  autoFocus={true}  value={form.text} name="text" onChange={handleUpdateInput}></Input>
+                    <Input sx={{ border: '1px solid green', margin: '15px'}} placeholder="Введите текст"  autoFocus={true}  inputRef={inputRef}    value={form.text} name="text" onChange={handleUpdateInput}></Input>
                 </Box>
                 <Box component="label" sx={{ padding: '15px' }}>
                     Автор:
