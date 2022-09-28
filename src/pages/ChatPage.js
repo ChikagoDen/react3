@@ -1,89 +1,43 @@
 import React from 'react';
-import {useState, useRef, useEffect} from "react";
-import {Box, Button, Input, List, ListItem, ListItemText, FormGroup, Grid} from "@mui/material";
-// import  Message from "./Message";
-import {Route,Routes} from "react-router-dom";
+import {useState} from "react";
+import {Box, List, ListItem} from "@mui/material";
+import {Link} from "react-router-dom";
 
 
 const ChatPage = () => {
-    const [chatList] = useState([
+    const [chatList,setChatList] = useState([
         { id:'1',chatName:"Чат1"},
         { id:'2',chatName:"Чат2"},
         { id:'3',chatName:"Чат3"},
     ]);
-    const [messagesList, setMessagesList] = useState([]);
+    const [name,setName] =useState('');
 
-    let [form, setForm] = useState({
-        text: '',
-        author: '',
-        id:'',
-    });
-    const handleSubmit = e => {
-        e.preventDefault();
-        setMessagesList(prevState => [...prevState,{
-            id:messagesList.length<=0?0:messagesList[messagesList.length-1].id+1,
-            text:form.text,
-            author:form.author,
-        }]);
-        setForm({
-            text:'',
-            author:'',
-        });
+
+    const handleDelete =(id)=>{
+        const  filtered=chatList.filter((chatList)=>chatList.id !== id);
+        setChatList(filtered);
     };
-    const handleUpdateInput = e => {
-        setForm({...form,[e.target.name]: e.target.value});
-    };
-
-    const  inputRef=useRef(null);
-
-    useEffect(()=>{
-
-            focusTextField(inputRef.current);
-        },[form.text]
-    );
-    function focusTextField(input){
-        if(input) {
-            input.focus();
+    const handleAdd = ()=>{
+        const chatObj ={
+            chatName:name,
+            id:chatList.length<=0?0:chatList[chatList.length-1].id+1,
         }
+        setChatList(prevState => [...prevState,chatObj]);
     }
-
-
     return(
-            <Box component="div" sx={{ border: '1px dashed grey' }}>
-                <FormGroup>
-                    <Box component="label" sx={{ padding: '15px' }}>
-                        Текст:
-                        <Input sx={{ border: '1px solid green', margin: '15px'}} placeholder="Введите текст"  autoFocus={true}  inputRef={inputRef}    value={form.text} name="text" onChange={handleUpdateInput}></Input>
-                    </Box>
-                    <Box component="label" sx={{ padding: '15px' }}>
-                        Автор:
-                        <Input sx={{ border: '1px solid green', margin: '15px'}} placeholder="Введите свое имя" value={form.author} name="author" type="text" onChange={handleUpdateInput}></Input>
-                    </Box>
-                    <Button variant="contained" color="success" onClick={handleSubmit}>Отправить</Button>
-                </FormGroup>
-                <Grid  container spacing={2}>
-                    <Grid  item xs={4}>
-                        <List>
-                            {chatList.map(chat =>{
-                                return(
-                                    <ListItem key={chat.id}>
-                                        {chat.chatName}
-                                    </ListItem>)
-                            })}
-                        </List>
-                    </Grid>
-                    <Grid item xs={8}>
-                        <List>
-                            {messagesList.map(message =>{
-                                return(
-                                    <ListItem key={message.id}>
-                                        <ListItemText primary={"Сообщение:"+message.text} secondary={"Автор:"+message.author}></ListItemText>
-                                    </ListItem>)
-                            })}
-                        </List>
-                    </Grid>
-                </Grid>
-            </Box>
+        <Box component="div" sx={{ border: '1px dashed grey' }}>
+            <List>
+                {chatList.map(chat =>{
+                    return(
+                        <ListItem key={chat.id}>
+                            <Link key={chat.id}  to={`/message/${chat.id}`}>{chat.chatName}</Link>
+                            <button onClick={()=>handleDelete(chat.id)}>Удалить чат</button>
+                        </ListItem>)
+                })}
+            </List>
+            <input value={name} onChange={(e)=>setName(e.target.value)} />
+            <button onClick={handleAdd}>Добавить чат</button>
+        </Box>
     )
 };
 
