@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Outlet} from "react-router-dom";
 import CastomLinc from "./CastomLinc";
+import {ThemeContecst} from "../contecst/ContecstThema";
 
 const Lauot = () => {
+    const {theme, funcThema} = useContext(ThemeContecst);
     return (
         <>
             <header>
@@ -20,13 +22,17 @@ const Lauot = () => {
                 <br/>
                 <hr/>
             </header>
-            <main>
+            <main style={{background:theme.background, color:theme.color,minHeight:200}}>
                 <Outlet/>
             </main>
             <footer>
                 <br/>
                 <hr/>
                 Podval
+                <br/>
+                <button onClick={funcThema}>Переключить тему</button>
+                <br/>
+                <hr/>
             </footer>
         </>
     );

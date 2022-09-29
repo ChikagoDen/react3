@@ -2,6 +2,7 @@ import React from 'react';
 import {useState} from "react";
 import {Box, Button, Input, List, ListItem, ListItemText, FormGroup, Grid} from "@mui/material";
 import {useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 const Message = () => {
@@ -55,12 +56,12 @@ const Message = () => {
                 </Box>
                 <Button variant="contained" color="success" onClick={handleSubmit}>Отправить</Button>
             </FormGroup>
-            <Grid  container spacing={2}>
+            <Grid  container spacing={3}>
                 <Grid  item xs={4}>
                     Название чата:{idChat}
 
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={4}>
                     <List>
                         {MessageListChat(Number(idChat)).map(message =>{
                             return(
@@ -69,6 +70,18 @@ const Message = () => {
                                 </ListItem>)
                         })}
                     </List>
+                </Grid>
+                <Grid  item xs={4}>
+                    Выбрать сообщения автора:
+                    <br/>
+                    {MessageListChat(Number(idChat)).map(message =>{
+                        return(
+                            <p key={message.id} >
+                                Автор: <Link  to={`/message/${idChat}/${message.author}`}>{message.author}</Link>
+                            </p>)
+                    })}
+
+
                 </Grid>
             </Grid>
         </Box>
