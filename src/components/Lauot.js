@@ -17,11 +17,15 @@ const Lauot = () => {
                 <CastomLinc to="/chats">
                     Чаты
                 </CastomLinc>
+                <br/>
+                <hr/>
             </header>
             <main>
                 <Outlet/>
             </main>
             <footer>
+                <br/>
+                <hr/>
                 Podval
             </footer>
         </>
