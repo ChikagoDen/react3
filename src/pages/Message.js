@@ -57,11 +57,11 @@ const Message = () => {
                 <Button variant="contained" color="success" onClick={handleSubmit}>Отправить</Button>
             </FormGroup>
             <Grid  container spacing={3}>
-                <Grid  item xs={4}>
+                <Grid  item xs={2}>
                     Название чата:{idChat}
 
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={5}>
                     <List>
                         {MessageListChat(Number(idChat)).map(message =>{
                             return(
@@ -71,7 +71,7 @@ const Message = () => {
                         })}
                     </List>
                 </Grid>
-                <Grid  item xs={4}>
+                <Grid  item xs={5}>
                     Выбрать сообщения автора:
                     <br/>
                     {MessageListChat(Number(idChat)).map(message =>{
