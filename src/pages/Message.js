@@ -1,20 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useState} from "react";
 import {Box, Button, Input, List, ListItem, ListItemText, FormGroup, Grid} from "@mui/material";
 import {useParams} from "react-router-dom";
 import {Link} from "react-router-dom";
+import {messagesListContext} from "../contecst/ContextMessageArr";
 
 
 const Message = () => {
-    const [messagesList, setMessagesList] = useState([
-        { text: 'eeeeeeeee', author: 'qwer', id:1, idChat:1},
-        { text: 'tttttttttt', author: 'asd', id:1, idChat:2},
-        { text: 'vvvvvvvvvvvvv', author: 'cvb', id:2, idChat:1},
-        { text: 'bbbbbbbbbbb', author: 'qwer', id:3, idChat:1},
-        { text: 'nnnnnnnnn', author: 'asd', id:1, idChat:3},
-        { text: 'dddddddd', author: 'cvb', id:2, idChat:2},
-    ]);
-
+    const {messagesListArr,funcMessagesList} = useContext(messagesListContext);
+    const [messagesList, setMessagesList] = useState(messagesListArr);
     let [form, setForm] = useState({
         text: '',
         author: '',
@@ -22,10 +16,20 @@ const Message = () => {
         idChat:null
     });
     const {idChat}=useParams();
+
+    const MessageListChat =(idChat)=>{
+        const MessageChat =messagesList.filter((messagesList)=>messagesList.idChat===idChat);
+        return MessageChat;
+    }
+    const MessageListChatId =(idChat)=>{
+        const MessageChat =MessageListChat(Number(idChat));
+        const id= MessageChat[MessageChat.length-1].id+1;
+        return Number(id);
+    }
     const handleSubmit = e => {
         e.preventDefault();
         setMessagesList(prevState => [...prevState,{
-            id:messagesList.length<=0?0:messagesList[messagesList.length-1].id+1,
+            id:MessageListChatId(idChat),
             text:form.text,
             author:form.author,
             idChat:Number(idChat) ,
@@ -38,10 +42,6 @@ const Message = () => {
     const handleUpdateInput = e => {
         setForm({...form,[e.target.name]: e.target.value});
     };
-    const MessageListChat =(idChat)=>{
-       const MessageChat =messagesList.filter((messagesList)=>messagesList.idChat===idChat);
-       return MessageChat;
-    }
 
     return(
         <Box component="div" sx={{ border: '1px dashed grey' }}>
@@ -59,7 +59,6 @@ const Message = () => {
             <Grid  container spacing={3}>
                 <Grid  item xs={2}>
                     Название чата:{idChat}
-
                 </Grid>
                 <Grid item xs={5}>
                     <List>
@@ -80,8 +79,6 @@ const Message = () => {
                                 Автор: <Link  to={`/message/${idChat}/${message.author}`}>{message.author}</Link>
                             </p>)
                     })}
-
-
                 </Grid>
             </Grid>
         </Box>

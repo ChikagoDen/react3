@@ -2,9 +2,9 @@ import {createContext} from "react";
 
 export const themes = {
     light:
-        { background:'green', color:'white' }
+        { background:'lightgrey', color:'black' }
     ,
     dark:
-        { background:'blue', color:'red' }
+        { background:'darkgrey', color:'white' }
 }
 export const ThemeContecst = createContext({theme:themes.light, funcThema: ()=>{}} );

@@ -1,20 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useState} from "react";
 import {Box, Button, Input, List, ListItem, ListItemText, FormGroup, Grid} from "@mui/material";
 import {useParams} from "react-router-dom";
+import {messagesListContext} from "../contecst/ContextMessageArr";
 
 const ChatFiltrAuthor = () => {
-    const [messagesList, setMessagesList] = useState([
-        { text: 'eeeeeeeee', author: 'qwer', id:1, idChat:1},
-        { text: 'tttttttttt', author: 'asd', id:1, idChat:2},
-        { text: 'vvvvvvvvvvvvv', author: 'cvb', id:2, idChat:1},
-        { text: 'bbbbbbbbbbb', author: 'qwer', id:3, idChat:1},
-        { text: 'nnnnnnnnn', author: 'asd', id:1, idChat:3},
-        { text: 'dddddddd', author: 'cvb', id:2, idChat:2},
-    ]);
-
+    const {messagesListArr,funcMessagesList} = useContext(messagesListContext);
+    const [messagesList, setMessagesList] = useState(messagesListArr);
     const {idChat,author}=useParams();
-
     const MessageListChatAuthor =(idChat)=>{
         const MessageChat =messagesList.filter((messagesList)=>messagesList.idChat===idChat&&messagesList.author===author);
         return MessageChat;
