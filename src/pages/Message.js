@@ -42,7 +42,6 @@ const Message = () => {
     const handleUpdateInput = e => {
         setForm({...form,[e.target.name]: e.target.value});
     };
-
     return(
         <Box component="div" sx={{ border: '1px dashed grey' }}>
             <FormGroup>

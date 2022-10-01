@@ -12,7 +12,6 @@ const ChatFiltrAuthor = () => {
         const MessageChat =messagesList.filter((messagesList)=>messagesList.idChat===idChat&&messagesList.author===author);
         return MessageChat;
     }
-
     return(
         <Box component="div" sx={{ border: '1px dashed grey' }}>
             <Grid  container spacing={3}>
