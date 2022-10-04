@@ -10,7 +10,6 @@ import Message from "./pages/Message";
 import ChatFiltrAuthor from "./pages/ChatFiltrAuthor";
 import {ThemeContecst, themes} from "./contecst/ContecstThema";
 
-
 export function App() {
     const [thema,setThema] = useState(themes.light);
     const toggleThemas = ()=>{
