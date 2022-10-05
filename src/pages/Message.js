@@ -9,79 +9,22 @@ import {type} from "@testing-library/user-event/dist/type";
 
 
 const Message = () => {
-
-    // const count = useSelector(state => state.count);
-
     const messagesList=useSelector( state => state. messagesList. messagesList);
     const dispatch = useDispatch();
-    console.log(messagesList);
-    // const {messagesListArr,funcMessagesList} = useContext(messagesListContext);
-
-    // const [messagesList, setMessagesList] = useState(messagesListArr);
-    // const [messagesList=messagesListContext2, setMessagesList] = useState();
-    // messagesList=messagesListContext2;
-    // { label: 'Съесть пиццу,', complete: false }
-
-
-
-
-    const  setMessagesList=null ;
     const {idChat}=useParams();
+    const MessageListChat =messagesList.filter((messagesList)=>messagesList.idChat===Number(idChat));
+    const handleSubmit=(form)=>{dispatch({type:'addMessage',payload:form});}
     let [form, setForm] = useState({
         text: '',
         author: '',
         id:null,
         idChat:idChat
     });
-
-    const handleSubmit2=(Pay)=>{
-        dispatch({type:'addMessage',payload:Pay});
-    }
-
-
-
-    const MessageListChat =(idChat)=>{
-        const MessageChat =messagesList.filter((messagesList)=>messagesList.idChat===idChat);
-        return MessageChat;
-    }
-    const MessageListChatId =(idChat)=>{
-        const MessageChat =MessageListChat(Number(idChat));
-        const id= MessageChat[MessageChat.length-1].id+1;
-        return Number(id);
-    }
-    const form2={
-        id:20,
-        text:"kwebclkjbwc",
-        author:" xwejx bjbx",
-        idChat:1 ,
-    }
-  //   const puschhh = (form2) =>{
-  //       dispatch({type:'qqq',payload:form2})
-  // }
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setMessagesList(prevState => [...prevState,{
-            id:MessageListChatId(idChat),
-            text:form.text,
-            author:form.author,
-            idChat:Number(idChat) ,
-        }]);
-        setForm({
-            text:'',
-            author:'',
-        });
-    };
     const handleUpdateInput = e => {
         setForm({...form,[e.target.name]: e.target.value});
     };
-    const arr=form;
     return(
         <Box component="div" sx={{ border: '1px dashed grey' }}>
-            {/*<h1>{count} </h1>*/}
-            <div>
-                <button onClick={()=>dispatch({type:'incr'})}>+</button>
-            </div>
             <FormGroup>
                 <Box component="label" sx={{ padding: '15px' }}>
                     Текст:
@@ -91,7 +34,7 @@ const Message = () => {
                     Автор:
                     <Input sx={{ border: '1px solid green', margin: '15px'}} placeholder="Введите свое имя" value={form.author} name="author" type="text" onChange={handleUpdateInput}></Input>
                 </Box>
-                <Button variant="contained" color="success" onClick={()=>handleSubmit2(form2)}>Отправить</Button>
+                <Button variant="contained" color="success" onClick={()=>handleSubmit(form)}>Отправить</Button>
             </FormGroup>
             <Grid  container spacing={3}>
                 <Grid  item xs={2}>
@@ -99,7 +42,7 @@ const Message = () => {
                 </Grid>
                 <Grid item xs={5}>
                     <List>
-                        {MessageListChat(Number(idChat)).map(message =>{
+                        {MessageListChat.map(message =>{
                             return(
                                 <ListItem key={message.id}>
                                     <ListItemText primary={"Сообщение:"+message.text} secondary={"Автор:"+message.author}></ListItemText>
@@ -110,7 +53,7 @@ const Message = () => {
                 <Grid  item xs={5}>
                     Выбрать сообщения автора:
                     <br/>
-                    {MessageListChat(Number(idChat)).map(message =>{
+                    {  MessageListChat.map(message =>{
                         return(
                             <p key={message.id} >
                                 Автор: <Link  to={`/message/${idChat}/${message.author}`}>{message.author}</Link>
