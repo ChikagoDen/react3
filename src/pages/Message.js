@@ -35,7 +35,7 @@ const Message = () => {
     });
 
     const handleSubmit2=(Pay)=>{
-        dispatch({type:'ihcr',payload:Pay});
+        dispatch({type:'addMessage',payload:Pay});
     }
 
 
@@ -49,12 +49,12 @@ const Message = () => {
         const id= MessageChat[MessageChat.length-1].id+1;
         return Number(id);
     }
-    // const form2={
-    //     id:20,
-    //     text:"kwebclkjbwc",
-    //     author:" xwejx bjbx",
-    //     idChat:2 ,
-    // }
+    const form2={
+        id:20,
+        text:"kwebclkjbwc",
+        author:" xwejx bjbx",
+        idChat:1 ,
+    }
   //   const puschhh = (form2) =>{
   //       dispatch({type:'qqq',payload:form2})
   // }
@@ -91,7 +91,7 @@ const Message = () => {
                     Автор:
                     <Input sx={{ border: '1px solid green', margin: '15px'}} placeholder="Введите свое имя" value={form.author} name="author" type="text" onChange={handleUpdateInput}></Input>
                 </Box>
-                <Button variant="contained" color="success" onClick={handleSubmit2(form)}>Отправить</Button>
+                <Button variant="contained" color="success" onClick={()=>handleSubmit2(form2)}>Отправить</Button>
             </FormGroup>
             <Grid  container spacing={3}>
                 <Grid  item xs={2}>
