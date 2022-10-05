@@ -2,32 +2,22 @@ import React from 'react';
 import {useState} from "react";
 import {Box, List, ListItem} from "@mui/material";
 import {Link} from "react-router-dom";
-
+import {useDispatch, useSelector} from "react-redux";
 
 const ChatPage = () => {
-    const [chatList,setChatList] = useState([
-        { id:'1',chatName:"Чат1"},
-        { id:'2',chatName:"Чат2"},
-        { id:'3',chatName:"Чат3"},
-    ]);
+    const chats=useSelector(state =>state.chats.chats);
+    const dispatch = useDispatch();
     const [name,setName] =useState('');
-
-
     const handleDelete =(id)=>{
-        const  filtered=chatList.filter((chatList)=>chatList.id !== id);
-        setChatList(filtered);
+        dispatch({type:'delete', payload:id})
     };
-    const handleAdd = ()=>{
-        const chatObj ={
-            chatName:name,
-            id:chatList.length<=0?0:chatList[chatList.length-1].id+1,
-        }
-        setChatList(prevState => [...prevState,chatObj]);
-    }
+    const handleAdd =(name)=>{
+        dispatch({type:'add', payload:name})
+    };
     return(
         <Box component="div" sx={{ border: '1px dashed grey' }}>
             <List>
-                {chatList.map(chat =>{
+                {chats.map(chat =>{
                     return(
                         <ListItem key={chat.id}>
                             <Link key={chat.id}  to={`/message/${chat.id}`}>{chat.chatName}</Link>
@@ -36,7 +26,8 @@ const ChatPage = () => {
                 })}
             </List>
             <input value={name} onChange={(e)=>setName(e.target.value)} />
-            <button onClick={handleAdd}>Добавить чат</button>
+
+            <button onClick={()=>handleAdd(name)}>Добавить чат</button>
         </Box>
     )
 };
