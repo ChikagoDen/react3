@@ -14,7 +14,7 @@ const Message = () => {
     const dispatch = useDispatch();
     const {idChat}=useParams();
     const MessageListChat =messagesList.filter((messagesList)=>messagesList.idChat===Number(idChat));
-    const handleSubmit=(form)=>{dispatch({type:'addMessage',payload:form});}
+    const handleSubmit=(form)=>{dispatch({type:'addMessage',payload:form,meta:{timePause:2000}});}
     let [form, setForm] = useState({
         text: '',
         author: '',

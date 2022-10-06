@@ -13,9 +13,6 @@ const initialState  = {
 
 export  const messageReducer =(state=initialState , action)=>{
 
-
-    const objektPayload=action.payload===undefined?0:action.payload;
-
     const MessageListChat =(idChat)=>{
         const MessageChat = state.messagesList.filter((mes)=>mes.idChat===Number(idChat));
         return MessageChat;
@@ -30,10 +27,10 @@ export  const messageReducer =(state=initialState , action)=>{
     switch (action.type) {
         case 'addMessage':
             const chatObj= {
-                id:MessageListChatId(objektPayload.idChat),
-                text:objektPayload.text,
-                author:objektPayload.author,
-                idChat:Number(objektPayload.idChat)};
+                id:MessageListChatId(action.payload.idChat),
+                text:action.payload.text,
+                author:action.payload.author,
+                idChat:Number(action.payload.idChat)};
             return {
                 ...state,
                 messagesList: [...state.messagesList,chatObj]
