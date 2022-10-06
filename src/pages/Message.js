@@ -6,10 +6,11 @@ import {Link} from "react-router-dom";
 import {messagesListContext} from "../contecst/ContextMessageArr";
 import {useDispatch, useSelector} from "react-redux";
 import {type} from "@testing-library/user-event/dist/type";
+import {messageSelector} from "../redux/reducers/messageSelector";
 
 
 const Message = () => {
-    const messagesList=useSelector( state => state. messagesList. messagesList);
+    const messagesList=useSelector( messageSelector);
     const dispatch = useDispatch();
     const {idChat}=useParams();
     const MessageListChat =messagesList.filter((messagesList)=>messagesList.idChat===Number(idChat));
