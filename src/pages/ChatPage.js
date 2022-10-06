@@ -3,9 +3,10 @@ import {useState} from "react";
 import {Box, List, ListItem} from "@mui/material";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
+import {chatSelector} from "../redux/reducers/chatSelector";
 
 const ChatPage = () => {
-    const chats=useSelector(state =>state.chats.chats);
+    const chats=useSelector(chatSelector);
     const dispatch = useDispatch();
     const [name,setName] =useState('');
     const handleDelete =(id)=>{
