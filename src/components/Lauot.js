@@ -21,6 +21,11 @@ const Lauot = () => {
                 </CastomLinc>
                 <br/>
                 <hr/>
+                <CastomLinc to="/git">
+                    ГИТ
+                </CastomLinc>
+                <br/>
+                <hr/>
             </header>
             <main style={{background:theme.background, color:theme.color,minHeight:200}}>
                 <Outlet/>
