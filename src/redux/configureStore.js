@@ -3,6 +3,8 @@ import {chatsReducer} from "./reducers/chatsReducers";
 import {messageReducer} from "./reducers/messageReducer";
 import storage from "redux-persist/lib/storage";
 import {persistReducer, persistStore} from "redux-persist";
+import thunk from "redux-thunk";
+import {gitReducer} from "./reducers/gitReducer";
 
 const config ={
     key:'root',
@@ -11,7 +13,7 @@ const config ={
 
 
 
-const logger = (store) => (next) => (action) => {
+const logger = (story) => (next) => (action) => {
     const timePause=action.meta?.timePause;
     if (!timePause){
         return next(action);
@@ -25,12 +27,13 @@ const logger = (store) => (next) => (action) => {
 
 const reducer =combineReducers({
     chats: chatsReducer,
-    messagesList:messageReducer
+    messagesList:messageReducer,
+    gits:gitReducer
 });
 
 const persistedReducer = persistReducer(config,reducer);
 
-export const store = createStore(persistedReducer,applyMiddleware(logger));
+export const store = createStore(persistedReducer,applyMiddleware(thunk));
 
 export const persistor = persistStore(store);
 
