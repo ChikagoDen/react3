@@ -10,6 +10,8 @@ import Message from "./pages/Message";
 import ChatFiltrAuthor from "./pages/ChatFiltrAuthor";
 import {ThemeContecst, themes} from "./contecst/ContecstThema";
 import PageGit from "./pages/PageGit";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 export function App() {
     const [thema,setThema] = useState(themes.light);
@@ -27,6 +29,8 @@ export function App() {
                     <Route path={'/message/:idChat'} element={<Message/>}/>
                     <Route path={'/message/:idChat/:author'} element={<ChatFiltrAuthor/>}/>
                     <Route path={'/git'} element={<PageGit/>}/>
+                    <Route path={'/login'} element={<LoginPage/>}/>
+                    <Route path={'/register'} element={<RegisterPage/>}/>
                 </Route>
                 <Route  path={'*'} element={<NotEoundPage/>}/>
             </Routes>

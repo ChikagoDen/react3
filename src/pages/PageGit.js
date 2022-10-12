@@ -25,12 +25,12 @@ const PageGit = () => {
             <h2>Идет Загрузка .... </h2>
         </div>
     }
-    if (error!==null){
-        return <div>
-            <h2>ОШИБКА!!! </h2>
-            <p>{error}</p>
-        </div>
-    }
+    // if (error!==null){
+    //     return <div>
+    //         <h2>ОШИБКА!!! </h2>
+    //         <p>{error}</p>
+    //     </div>
+    // }
 
     return (
         <div>

@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import {persistReducer, persistStore} from "redux-persist";
 import thunk from "redux-thunk";
 import {gitReducer} from "./reducers/gitReducer";
+import {indexReducer} from "./reducers/indexReducer";
 
 const config ={
     key:'root',
@@ -28,7 +29,8 @@ const config ={
 const reducer =combineReducers({
     chats: chatsReducer,
     messagesList:messageReducer,
-    posts:gitReducer
+    posts:gitReducer,
+    auth:indexReducer
 });
 
 const persistedReducer = persistReducer(config,reducer);
