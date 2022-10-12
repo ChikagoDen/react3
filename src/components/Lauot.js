@@ -1,46 +1,46 @@
 import React, {useContext} from 'react';
 import {Outlet} from "react-router-dom";
-import CastomLinc from "./CastomLinc";
-import {ThemeContecst} from "../contecst/ContecstThema";
+import CustomLinc from "./CastomLinc";
+import {ThemeContext} from "../contecst/ContecstThema";
 
-const Lauot = () => {
-    const {theme, funcThema} = useContext(ThemeContecst);
+const Layout = () => {
+    const {theme, funcTheme} = useContext(ThemeContext);
     return (
         <>
-            <header>
-                <CastomLinc to={'/'} >
-                    Главная
-                </CastomLinc>
-                <br/>
-                <CastomLinc to="/profile">
-                    Профиль
-                </CastomLinc>
-                <br/>
-                <CastomLinc to="/chats">
-                    Чаты
-                </CastomLinc>
-                <br/>
-                <hr/>
-                <CastomLinc to="/git">
-                    ГИТ
-                </CastomLinc>
-                <br/>
-                <hr/>
-            </header>
-            <main style={{background:theme.background, color:theme.color,minHeight:200}}>
-                <Outlet/>
-            </main>
-            <footer>
-                <br/>
-                <hr/>
-                Podval
-                <br/>
-                <button onClick={funcThema}>Переключить тему</button>
-                <br/>
-                <hr/>
-            </footer>
+        <header>
+            <CustomLinc to={'/'} >
+                Главная
+            </CustomLinc>
+            <br/>
+            <CustomLinc to="/profile">
+                Профиль
+            </CustomLinc>
+            <br/>
+            <CustomLinc to="/chats">
+                Чаты
+            </CustomLinc>
+            <br/>
+            <hr/>
+            <CustomLinc to="/git">
+                ГИТ
+            </CustomLinc>
+            <br/>
+            <hr/>
+        </header>
+        <main style={{background:theme.background, color:theme.color,minHeight:200}}>
+            <Outlet/>
+        </main>
+        <footer>
+            <br/>
+            <hr/>
+            Подвал
+            <br/>
+            <button onClick={funcTheme}>Переключить тему</button>
+            <br/>
+            <hr/>
+        </footer>
         </>
     );
 };
 
-export default Lauot;
+export default  Layout;

@@ -5,35 +5,22 @@ import storage from "redux-persist/lib/storage";
 import {persistReducer, persistStore} from "redux-persist";
 import thunk from "redux-thunk";
 import {gitReducer} from "./reducers/gitReducer";
+import {indexReducer} from "./reducers/indexReducer";
 
 const config ={
     key:'root',
     storage
 }
 
-
-
-// const logger = (story) => (next) => (action) => {
-//     const timePause=action.meta?.timePause;
-//     if (!timePause){
-//         return next(action);
-//     }
-//     if (action.type === 'addMessage') {
-//         setTimeout(()=>{alert( `${action.payload.author} вы отправили сообщение!!!`  )},1000);
-//         const timeOut = setTimeout(()=>next(action),timePause);
-//         return ()=>{clearTimeout(timeOut)}
-//     }
-// };
-
 const reducer =combineReducers({
     chats: chatsReducer,
     messagesList:messageReducer,
-    posts:gitReducer
+    posts:gitReducer,
+    auth:indexReducer
 });
 
 const persistedReducer = persistReducer(config,reducer);
 
 export const store = createStore(persistedReducer,applyMiddleware(thunk));
-
-export const persistor = persistStore(store);
+export const persist = persistStore(store);
 

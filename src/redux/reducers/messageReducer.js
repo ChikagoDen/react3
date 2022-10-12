@@ -1,17 +1,6 @@
 import {messagesList} from "../../contecst/ContextMessageArr";
 
-const initialState  = {
-    messagesList: [
-        {text: 'eeeeeeeee', author: 'qwer', id: 1, idChat: 1},
-        {text: 'tttttttttt', author: 'asd', id: 1, idChat: 2},
-        {text: 'vvvvvvvvvvvvv', author: 'cvb', id: 2, idChat: 1},
-        {text: 'bbbbbbbbbbb', author: 'qwer', id: 3, idChat: 1},
-        {text: 'nnnnnnnnn', author: 'asd', id: 1, idChat: 3},
-        {text: 'dddddddd', author: 'cvb', id: 2, idChat: 2},]
-};
-
-
-export  const messageReducer =(state=initialState , action)=>{
+export  const messageReducer =(state=messagesList , action)=>{
 
     const MessageListChat =(idChat)=>{
         const MessageChat = state.messagesList.filter((mes)=>mes.idChat===Number(idChat));

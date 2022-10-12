@@ -1,20 +1,18 @@
-import React, {useContext} from 'react';
-import {useState} from "react";
+import React,{useState} from 'react';
 import {Box, Button, Input, List, ListItem, ListItemText, FormGroup, Grid} from "@mui/material";
-import {useParams} from "react-router-dom";
-import {Link} from "react-router-dom";
-import {messagesListContext} from "../contecst/ContextMessageArr";
+import {useParams,Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
+// import {messagesListContext} from "../contecst/ContextMessageArr";
 import {useDispatch, useSelector} from "react-redux";
-import {type} from "@testing-library/user-event/dist/type";
+// import {type} from "@testing-library/user-event/dist/type";
 import {messageSelector} from "../redux/reducers/messageSelector";
 
-
 const Message = () => {
-    const messagesList=useSelector( messageSelector);
+    const messagesList = useSelector( messageSelector);
     const dispatch = useDispatch();
-    const {idChat}=useParams();
-    const MessageListChat =messagesList.filter((messagesList)=>messagesList.idChat===Number(idChat));
-    const handleSubmit=(form)=>{dispatch({type:'addMessage',payload:form});}
+    const {idChat} = useParams();
+    const MessageListChat = messagesList.filter((messagesList)=>messagesList.idChat===Number(idChat));
+    const handleSubmit = (form)=>{dispatch({type:'addMessage',payload:form});}
     let [form, setForm] = useState({
         text: '',
         author: '',
@@ -25,6 +23,7 @@ const Message = () => {
     const handleUpdateInput = e => {
         setForm({...form,[e.target.name]: e.target.value});
     };
+
     return(
         <Box component="div" sx={{ border: '1px dashed grey' }}>
             <FormGroup>
@@ -55,7 +54,7 @@ const Message = () => {
                 <Grid  item xs={5}>
                     Выбрать сообщения автора:
                     <br/>
-                    {  MessageListChat.map(message =>{
+                    { MessageListChat.map(message =>{
                         return(
                             <p key={message.id} >
                                 Автор: <Link  to={`/message/${idChat}/${message.author}`}>{message.author}</Link>

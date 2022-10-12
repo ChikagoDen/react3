@@ -1,15 +1,15 @@
 import React from 'react';
-import CastomLinc from "../components/CastomLinc";
+import CustomLinc from "../components/CastomLinc";
 
-const NotEoundPage = () => {
+const NotFoundPage = () => {
     return (
         <div>
             Страница не найдена, вернитесь на главную страницу:
-            <CastomLinc to={'/'} >
+            <CustomLinc to={'/'} >
                 Главная
-            </CastomLinc>
+            </CustomLinc>
         </div>
     );
 };
 
-export default NotEoundPage;
+export default NotFoundPage;
