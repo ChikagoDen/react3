@@ -1,10 +1,9 @@
-import React, {useContext} from 'react';
-import {useState} from "react";
-import {Box, Button, Input, List, ListItem, ListItemText, FormGroup, Grid} from "@mui/material";
+import React, {useContext,useState} from 'react';
+import {Box, List, ListItem, ListItemText, Grid} from "@mui/material";
 import {useParams} from "react-router-dom";
 import {messagesListContext} from "../contecst/ContextMessageArr";
 
-const ChatFiltrAuthor = () => {
+const ChatFilterAuthor = () => {
     const {messagesListArr,funcMessagesList} = useContext(messagesListContext);
     const [messagesList, setMessagesList] = useState(messagesListArr);
     const {idChat,author}=useParams();
@@ -17,7 +16,6 @@ const ChatFiltrAuthor = () => {
             <Grid  container spacing={3}>
                 <Grid  item xs={4}>
                     Название чата:{idChat}
-
                 </Grid>
                 <Grid item xs={4}>
                     <List>
@@ -34,4 +32,4 @@ const ChatFiltrAuthor = () => {
     )
 };
 
-export default ChatFiltrAuthor;
+export default ChatFilterAuthor;

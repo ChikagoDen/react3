@@ -14,18 +14,20 @@ const LoginPage = () => {
         if(!email || !password) return;
         dispatch(loginInitial(email,password))
         navigate('/')
-
     }
 
     return (
         <div>
             <h2>Вход</h2>
             <form onSubmit={handleSubmit}>
+                Введите почту
                 <input value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                <br/>
+                Введите пароль
                 <input value={password} onChange={(e)=>setPassword(e.target.value)}/>
+                <br/>
                 <button type={"submit"}>Вход</button>
             </form>
-            
         </div>
     );
 };

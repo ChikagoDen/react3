@@ -12,20 +12,6 @@ const config ={
     storage
 }
 
-
-
-// const logger = (story) => (next) => (action) => {
-//     const timePause=action.meta?.timePause;
-//     if (!timePause){
-//         return next(action);
-//     }
-//     if (action.type === 'addMessage') {
-//         setTimeout(()=>{alert( `${action.payload.author} вы отправили сообщение!!!`  )},1000);
-//         const timeOut = setTimeout(()=>next(action),timePause);
-//         return ()=>{clearTimeout(timeOut)}
-//     }
-// };
-
 const reducer =combineReducers({
     chats: chatsReducer,
     messagesList:messageReducer,
@@ -36,6 +22,5 @@ const reducer =combineReducers({
 const persistedReducer = persistReducer(config,reducer);
 
 export const store = createStore(persistedReducer,applyMiddleware(thunk));
-
-export const persistor = persistStore(store);
+export const persist = persistStore(store);
 

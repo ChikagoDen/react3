@@ -1,5 +1,5 @@
-import React from 'react';
-import {useState} from "react";
+import React,{useState} from 'react';
+// import {useState} from "react";
 import {Box, List, ListItem} from "@mui/material";
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
@@ -27,7 +27,6 @@ const ChatPage = () => {
                 })}
             </List>
             <input value={name} onChange={(e)=>setName(e.target.value)} />
-
             <button onClick={()=>handleAdd(name)}>Добавить чат</button>
         </Box>
     )

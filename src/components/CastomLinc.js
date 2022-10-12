@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, useMatch} from "react-router-dom";
 
-const CastomLinc = ({to,children}) => {
+const CustomLinc = ({to,children}) => {
     const match=useMatch(to);
     return (
         <Link to={to} style={{color:match?"red":"black"}}>
@@ -10,4 +10,4 @@ const CastomLinc = ({to,children}) => {
     );
 };
 
-export default CastomLinc;
+export default CustomLinc;

@@ -9,7 +9,6 @@ import {
 } from "./actionIndex";
 import {auth} from "../../servises/firebase";
 
-
 const indexInitialState ={
     loading:false,
     error:null,
@@ -42,10 +41,8 @@ export  const indexReducer =(state = indexInitialState , action)=>{
                 ...state,
                 currentUser: state.currentUser=null
             }
-
         default :
             return state;
-
     }
 }
 
@@ -55,9 +52,7 @@ export const registerInitiate = (email,password,displayName)=>{
         auth
             .createUserWithEmailAndPassword(email,password)
             .then(({user})=>{
-                user.updateProfile({
-                    displayName
-                })
+                user.updateProfile(displayName)
                 dispatch(successToRegister(user))
             })
             .catch((error)=>dispatch(errorToRegister(error.toString())))

@@ -1,9 +1,8 @@
 import React from 'react';
-import CastomLinc from "../components/CastomLinc";
+import CustomLinc from "../components/CastomLinc";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutInitial} from "../redux/reducers/indexReducer";
 import {useNavigate} from "react-router-dom";
-
 
 const HomePage = () => {
     const dispatch=useDispatch();
@@ -13,18 +12,16 @@ const HomePage = () => {
     const handleAuth =()=>{
         if(user)return dispatch(logoutInitial);
         navigate('/register')
-
     }
-
     return (
         <div>
-            <CastomLinc to="/register">
+            <CustomLinc to="/register">
                 Регистрация
-            </CastomLinc>
+            </CustomLinc>
             <br/>
-            <CastomLinc to="/login">
+            <CustomLinc to="/login">
                 Вход
-            </CastomLinc>
+            </CustomLinc>
             <br/>
             <br/>
             Главная
