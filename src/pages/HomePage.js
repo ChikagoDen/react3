@@ -5,29 +5,21 @@ import {logoutInitial} from "../redux/reducers/indexReducer";
 import {useNavigate} from "react-router-dom";
 
 const HomePage = () => {
-    const dispatch=useDispatch();
-    const user=useSelector(state => state.user);
-    const navigate= useNavigate();
-
-    const handleAuth =()=>{
-        if(user)return dispatch(logoutInitial);
-        navigate('/register')
-    }
+    // const dispatch=useDispatch();
+    // const user=useSelector(state => state.user);
+    // const navigate= useNavigate();
+    //
+    // const handleAuth =()=>{
+    //     if(user)return dispatch(logoutInitial);
+    //     navigate('/register')
+    // }
     return (
         <div>
-            <CustomLinc to="/register">
-                Регистрация
-            </CustomLinc>
-            <br/>
-            <CustomLinc to="/login">
-                Вход
-            </CustomLinc>
             <br/>
             <br/>
             Главная
             <br/>
             <br/>
-            <button onClick={handleAuth}>Выйти</button>
         </div>
     );
 };
