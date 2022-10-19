@@ -9,6 +9,7 @@ import {messageSelector} from "../redux/reducers/messageSelector";
 
 const Message = () => {
     const messagesList = useSelector(messageSelector);
+    console.log(messagesList);
     const dispatch = useDispatch();
     const {idChat} = useParams();
     const MessageListChat = messagesList.filter((messagesList)=>messagesList.idChat===Number(idChat));

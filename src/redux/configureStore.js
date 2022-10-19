@@ -14,9 +14,9 @@ const config ={
 
 const reducer =combineReducers({
     chats: chatsReducer,
-    messagesList:messageReducer,
-    posts:gitReducer,
-    status:indexReducer
+    messagesList: messageReducer,
+    posts: gitReducer,
+    status: indexReducer
 });
 
 const persistedReducer = persistReducer(config,reducer);
