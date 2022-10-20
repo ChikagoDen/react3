@@ -12,6 +12,7 @@ import {ThemeContext, themes} from "./contecst/ContecstThema";
 import PageGit from "./pages/PageGit";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ProtectedRouters from "./components/ProtectedRouters";
 
 export function App() {
     const [thema,setThema] = useState(themes.light);
@@ -24,12 +25,12 @@ export function App() {
             <Routes>
                 <Route path={'/'} element={<Layout/>}>
                     <Route index element={<HomePage />}/>
-                    <Route path={'/profile'} element={<ProfilePage></ProfilePage>}></Route>
-                    <Route path={'/chats'} element={<ChatPage/>}/>
-                    <Route path={'/message/:idChat'} element={<Message/>}/>
-                    <Route path={'/message/:idChat/:author'} element={<ChatFiltrAuthor/>}/>
-                    <Route path={'/git'} element={<PageGit/>}/>
                     <Route path={'/login'} element={<LoginPage/>}/>
+                    <Route path={'/profile'} element={<ProtectedRouters><ProfilePage></ProfilePage></ProtectedRouters>}></Route>
+                    <Route path={'/chats'} element={<ProtectedRouters><ChatPage/></ProtectedRouters>}/>
+                    <Route path={'/message/:idChat'} element={<ProtectedRouters><Message/></ProtectedRouters>}/>
+                    <Route path={'/message/:idChat/:author'} element={<ChatFiltrAuthor/>}/>
+                    <Route path={'/history'} element={<ProtectedRouters><PageGit/></ProtectedRouters>}/>
                     <Route path={'/register'} element={<RegisterPage/>}/>
                 </Route>
                 <Route  path={'*'} element={<NotEoundPage/>}/>

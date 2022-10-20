@@ -36,10 +36,10 @@ export  const indexReducer =(state = indexInitialState , action)=>{
                 ...state,
                 currentUser: action.payload
             }
-        case types.SUCCESS_LOGIN:
+        case types.SUCCESS_LOGOUT:
             return {
                 ...state,
-                currentUser: state.currentUser=null
+                currentUser:null
             }
         default :
             return state;
@@ -52,8 +52,8 @@ export const registerInitiate = (email,password,displayName)=>{
         auth
             .createUserWithEmailAndPassword(email,password)
             .then(({user})=>{
-                user.updateProfile(displayName)
-                dispatch(successToRegister(user))
+                user=user.updateProfile(displayName);
+                dispatch(successToRegister(user));
             })
             .catch((error)=>dispatch(errorToRegister(error.toString())))
     }
@@ -72,7 +72,7 @@ export const loginInitial = (email,password)=>{
 }
 export const logoutInitial = ()=>{
     return(dispatch)=>{
-        dispatch(loadingToLogout())
+        dispatch(loadingToLogout());
         auth.signOut()
             .then(()=>dispatch(successToLogout()))
             .catch((error)=>dispatch(errorToLogout(error.toString())))
